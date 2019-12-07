@@ -4,20 +4,15 @@ import spotipy.util as util
 import json
 
 credentials = oauth2.SpotifyClientCredentials(client_id='26b486e6ddb841d190834b7dce27c20a', client_secret='f57c30c5d2e44d8385a384b85c04a687')
-
 token = credentials.get_access_token()
-spotify = spotipy.Spotify(auth=token)
-'''
 token = util.prompt_for_user_token(
-        username='put username here',
-        scope='user_top_read',
+        username='gleekyninja22',
+        scope='user-top-read',
         client_id='26b486e6ddb841d190834b7dce27c20a',
         client_secret='f57c30c5d2e44d8385a384b85c04a687',
-        redirect_uri=redirect_uri)
-
+        redirect_uri='http://google.com')
 spotify = spotipy.Spotify(auth=token)
 
-'''
 #artist uri
 top_uri = 'spotify:artist:5RADpgYLOuS2ZxDq7ggYYH'
 #get albums
@@ -46,3 +41,4 @@ for a in albs:
                 print(feature_names[ind] + " " + str(features[ind]))
                 print('')
             '''
+h
