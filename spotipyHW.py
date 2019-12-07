@@ -3,12 +3,14 @@ import spotipy.oauth2 as oauth2
 import spotipy.util as util
 import json
 
-#this method from spotipy docs
-def show_tracks(tracks):
+def track_feat(tracks):
     for i, item in enumerate(tracks['items']):
         track = item['track']
-        print(str(i) + " " + track['artists'][0]['name'] + " " + track['name'])
-#end method
+        name = track['name']
+        t = track['id']
+        feats = spotify.audio_features([t])
+        print(name)
+        print(feats)
         
 credentials = oauth2.SpotifyClientCredentials(client_id='26b486e6ddb841d190834b7dce27c20a', client_secret='f57c30c5d2e44d8385a384b85c04a687')
 token = credentials.get_access_token()
@@ -24,10 +26,7 @@ spotify = spotipy.Spotify(auth=token)
 playlist = spotify.user_playlist('gleekyninja22', playlist_id='37i9dQZF1EtlFPUefKa7S5', fields="tracks,next");
 #get the tracks (dict)
 tracks = playlist['tracks']
-show_tracks(tracks)
-while tracks['next']:
-    tracks = spotipy.next(tracks)
-    show_tracks(tracks)    
+track_feat(tracks)  
 '''
 #scrape all songs, calc averages
 checking = True
