@@ -9,7 +9,7 @@ def avg_valnc(tracks,psize):
         track = item['track']
         t = track['id']
         feats = spotify.audio_features([t])
-        valnc = valnc + float(feats[0]['valence'])
+        valnc = valnc + float(feats[0]['energy'])
     return valnc / psize
         
 credentials = oauth2.SpotifyClientCredentials(client_id='26b486e6ddb841d190834b7dce27c20a', client_secret='f57c30c5d2e44d8385a384b85c04a687')
@@ -22,9 +22,9 @@ token = util.prompt_for_user_token(
         redirect_uri='http://google.com')
 spotify = spotipy.Spotify(auth=token)
 
-#get playlist (dict) smash bros and chill -> .7
-playlist = spotify.user_playlist('gleekyninja22', playlist_id='4rWMkQBEqtw86orhlqB7bP', fields="tracks,next");
-pSize = 420
+#get playlist (dict) smash bros and chill 
+playlist = spotify.user_playlist('gleekyninja22', playlist_id='2GNnqVjOdPcnAUK4miJYOU', fields="tracks,next");
+pSize = 39
 #get the tracks (dict)
 tracks = playlist['tracks']
 #scrape all songs
@@ -42,7 +42,7 @@ while(checking):
     name = i = track['name']
     i = track['id']
     features = spotify.audio_features([i])
-    currV = float(features[0]['valence'])
+    currV = float(features[0]['energy'])
     #print(str(currV))
     #calc percent diff with average
     percentDiff = (abs(avgV-currV) / ((avgV+currV)/2)) * 100
